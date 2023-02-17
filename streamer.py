@@ -51,9 +51,9 @@ class Player:
 
     def filter_name(self, name):
         if ('twitch' in name):
-            return name.replace('twitch', '').trim()
+            return name.replace('twitch', '').strip()
         if ('ttv' in name):
-            return name.replace('ttv', '').trim()
+            return name.replace('ttv', '').strip()
         return name
     
     def find_possible_names(self):
