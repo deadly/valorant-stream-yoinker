@@ -1,5 +1,5 @@
 # Valorant Stream Yoinker
-Fiond the real username behind all hidden names by bypassing streamer mode, check all possible twitch names and print if a streamer is live
+Find the real username behind all hidden names by bypassing streamer mode, check all possible twitch names and print if a streamer is live
 
 # Discord Support Server
 https://discord.com/invite/faeM7p92pz
