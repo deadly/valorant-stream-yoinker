@@ -13,16 +13,18 @@ settings.json:
 
 
     - twitchReqDelay: the delay for the request checking if a streamer is live. If you are getting ratelimited, make this slower. If you want faster loading times, make this faster.
+
+# Example
+<p align="center">
+    <img src="https://raw.githubusercontent.com/deadly/valorant-stream-yoinker/main/example.png" alt="screenshot of VALORANT Stream Yoinker">
+</p>
+
 # Regions
 The program will ask you for your region. The available regions are NA, EU, LATAM, BR, AP, KR, and PBE. Type the region that you play on.
 
 # Is This Bannable
 USE AT YOUR OWN RISK. With all programs like this, there is no guarantee that it's safe because using the VALORANT API in this manner is against Riot's Terms of Service. No suspensions have been reported so far from using this program. All things considered, I would use this only on an alt account if you don't want to risk the API abuse account suspension on your main, albeit unlikely.
 
-# Example
-<p align="center">
-    <img src="https://raw.githubusercontent.com/deadly/valorant-stream-yoinker/main/example.png" alt="screenshot of VALORANT Stream Yoinker">
-</p>
 
 # License
 Copyright (c) [2023] [deadly]
