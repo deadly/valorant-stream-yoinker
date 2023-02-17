@@ -5,7 +5,7 @@ client = Client(region="na")
 client.activate()
 
 fetched = client.coregame_fetch_player()
-matchInfo = client.coregame_fetch_match(fetched['MatchID'])
+matchInfo = client.coregame_fetch_match(fetched['MatchID']) # data with players
 puuids = []
 
 for player in matchInfo['Players']:
