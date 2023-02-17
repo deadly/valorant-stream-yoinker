@@ -35,8 +35,7 @@ class Player:
         self.possibleNames = self.find_possible_names()
 
     def side(self, color):
-        side = lambda color: "Defending" if color == "Blue" else "Attacking"
-        if (side == "Blue"):
+        if  (color == "Blue"):
             return "Defending"
         else:
             return "Attacking"
