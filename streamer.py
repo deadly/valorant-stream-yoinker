@@ -7,22 +7,20 @@ class Player:
         self.agentID = agentID
         self.incognito = incognito
         self.team = team
-        self.name = None
-        self.tag = None
+        self.name = self.filter_name(self.set_name(puuid).split('#')[0])
+        self.tag = self.set_name(puuid).split('#')[1]
 
-        self.find_name(self.puuid)
+        #self.find_name(self.puuid)
         #self.possibleNames = self.find_possible_names()
     
-    def find_name(self, puuid):
+    def set_name(self, puuid):
         playerData = self.client.put(
             endpoint="/name-service/v2/players", 
             endpoint_type="pd", 
             json_data=[puuid]
         )[0]
 
-        self.name = self.filter_name(playerData['GameName'].lower())
-        self.tag = playerData['TagLine'].lower()
-
+        return f"{playerData['GameName'].lower()}#{playerData['TagLine']}"
 
     def filter_name(self, name):
         if ('twitch' in name):
@@ -60,7 +58,7 @@ class Player:
             if (name == self.last):
                 continue
             self.last = name
-            time.sleep(2.5)
+            time.sleep(3)
             state = requests.get(f'https://twitch.tv/{name}').content.decode('utf-8')
             if ('isLiveBroadcast' in state):
                 return name
