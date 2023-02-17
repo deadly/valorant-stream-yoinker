@@ -1,17 +1,35 @@
 import requests, time
 
 class Player:
-    def __init__(self, name):
-        self.name = name.split('#')[0].lower()
-        self.tag = name.split('#')[1].lower()
-        self.filter_name()
-        self.possibleNames = self.find_possible_names()
+    def __init__(self, client, puuid, agentID, incognito, team):
+        self.client = client
+        self.puuid = puuid
+        self.agentID = agentID
+        self.incognito = incognito
+        self.team = team
+        self.name = None
+        self.tag = None
+
+        self.find_name(self.puuid)
+        #self.possibleNames = self.find_possible_names()
     
-    def filter_name(self):
-        if ('twitch' in self.name):
-            self.name = self.name.replace('twitch', '').trim()
-        if ('ttv' in self.name):
-            self.name = self.name.replace('ttv', '').trim()
+    def find_name(self, puuid):
+        playerData = self.client.put(
+            endpoint="/name-service/v2/players", 
+            endpoint_type="pd", 
+            json_data=[puuid]
+        )[0]
+
+        self.name = self.filter_name(playerData['GameName'].lower())
+        self.tag = playerData['TagLine'].lower()
+
+
+    def filter_name(self, name):
+        if ('twitch' in name):
+            return name.replace('twitch', '').trim()
+        if ('ttv' in name):
+            return name.replace('ttv', '').trim()
+        return name
     
     def find_possible_names(self):
         self.name_u = self.name.replace(' ', '_')
