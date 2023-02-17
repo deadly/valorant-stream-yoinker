@@ -8,7 +8,10 @@ https://discord.com/invite/faeM7p92pz
 **MAKE SURE VALORANT IS OPEN BEFORE RUNNING.** Wait for a game to start, and then names will start printing and being checked.
 
 settings.json:
+
     - stateInterval: change for faster or slower delays between gamestate loop (Slower = less CPU usage. Faster = more cpu usage)
+
+
     - twitchReqDelay: the delay for the request checking if a streamer is live. If you are getting ratelimited, make this slower. If you want faster loading times, make this faster.
 # Regions
 The program will ask you for your region. The available regions are NA, EU, LATAM, BR, AP, KR, and PBE. Type the region that you play on.
