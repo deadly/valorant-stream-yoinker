@@ -31,6 +31,7 @@ class Player:
         self.incognito = incognito
         self.team = self.side(team)
         self.name = self.filter_name(self.set_name(puuid).split('#')[0])
+        self.full_name = self.set_name(puuid)
         self.tag = self.set_name(puuid).split('#')[1]
         self.possibleNames = self.find_possible_names()
 

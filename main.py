@@ -69,7 +69,7 @@ while (running):
             for player in players:
                 if (player.incognito):
                     found = True
-                    print(f"{player.name}#{player.tag} - {player.team} {player.agent}")
+                    print(f"{player.full_name} - {player.team} {player.agent}")
             
             if not found:
                 print("No hidden names found")
