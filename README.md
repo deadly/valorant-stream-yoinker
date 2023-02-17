@@ -21,7 +21,7 @@ USE AT YOUR OWN RISK. With all programs like this, there is no guarantee that it
 
 # Example
 <p align="center">
-    <img src="https://raw.githubusercontent.com/deadly/valorant-stream-yoinker/main/example.png" alt="Example screenshot of VALORANT Stream Yoinker">
+    <img src="https://raw.githubusercontent.com/deadly/valorant-stream-yoinker/main/example.png" alt="screenshot of VALORANT Stream Yoinker">
 </p>
 
 # License
