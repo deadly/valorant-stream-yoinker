@@ -1,5 +1,6 @@
 {
-    "region": null,
-    "stateInterval": 30,
-    "twitchReqInterval": 3
+    "region": null, 
+    "stateInterval": 30, 
+    "twitchReqDelay": 3, 
+    "ran": false
 }

@@ -29,10 +29,17 @@ class Player:
         self.puuid = puuid
         self.agent = agentMap[agentID]
         self.incognito = incognito
-        self.team = team
+        self.team = self.side(team)
         self.name = self.filter_name(self.set_name(puuid).split('#')[0])
         self.tag = self.set_name(puuid).split('#')[1]
         self.possibleNames = self.find_possible_names()
+
+    def side(self, color):
+        side = lambda teamID: "Defending" if teamID == "Blue" else "Attacking"
+        if (side == "Blue"):
+            return "Defending"
+        else:
+            return "Attacking"
     
     def set_name(self, puuid):
         playerData = self.client.put(
@@ -67,17 +74,16 @@ class Player:
             f"{self.name_u}_{self.tag}",
             f"{self.name_d}-{self.tag}",
             f"{self.name_u}-{self.tag}",
-            f"{self.tag}{self.name}"
+            f"{self.tag}{self.name}",
             f"{self.tag}_{self.name_d}",
             f"{self.tag}_{self.name_u}",
             f"{self.tag}-{self.name_d}",
             f"{self.tag}-{self.name_u}"
         ]))
 
-    def is_live(self):
-        print(self.possibleNames)
+    def is_live(self, delay):
         for name in self.possibleNames:
-            time.sleep(3)
+            time.sleep(delay)
             state = requests.get(f'https://twitch.tv/{name}').content.decode('utf-8')
             if ('isLiveBroadcast' in state):
                 return name
