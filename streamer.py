@@ -1,5 +1,5 @@
 import requests, time
-#1.0
+
 agentMap = {
     "add6443a-41bd-e414-f6ad-e58d267f4e95": "Jett",
     "a3bfb853-43b2-7238-a4f1-ad90e9e46bcc": "Reyna",
