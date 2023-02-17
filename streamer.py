@@ -48,7 +48,7 @@ class Player:
             json_data=[puuid]
         )[0]
 
-        return f"{playerData['GameName'].lower()}#{playerData['TagLine']}"
+        return f"{playerData['GameName']}#{playerData['TagLine']}"
 
     def filter_name(self, name):
         if ('twitch' in name):

@@ -5,6 +5,8 @@ from streamer import Player
 running = True
 seenMatches = []
 
+print('Valorant Stream Yoinker by https://github.com/deadly')
+
 with open('settings.json', 'r') as f:
     data = json.load(f)
     ranBefore = data['ran']
@@ -50,6 +52,7 @@ while (running):
         matchID = client.coregame_fetch_player()['MatchID']
 
         if (sessionState == "INGAME" and matchID not in seenMatches):
+            print('-'*10)
             print("Match detected")
             seenMatches.append(matchID)
             matchInfo = client.coregame_fetch_match(matchID)
