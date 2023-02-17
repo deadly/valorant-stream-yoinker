@@ -18,8 +18,10 @@ for player in matchInfo['Players']:
     ))
 
 for player in players:
-    print("agent " + player.agentID)
-    print("name " + player.name)
-    print("tag " + player.tag)
-    print("incognito " + str(player.incognito))
-    print("team " + player.team)
+    print(f"{player.name}#{player.tag} ({player.agent}): streamer mode: {player.incognito} team: {player.team}")
+    #print("agent " + player.agentID)
+    #print("name " + player.name)
+    #print("tag " + player.tag)
+    #print("incognito " + str(player.incognito))
+    #print("team " + player.team)
+    print(player.is_live())
