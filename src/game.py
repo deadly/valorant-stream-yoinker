@@ -1,17 +1,18 @@
 class Game:
-    def init(self, client, matchID, players):
+    def init(self, matchID, players):
         self.matchID = matchID
         self.players = players
     
     def find_hidden_names(self, players):
-        found = False
+        self.found = False
         for player in players:
             if (player.incognito):
-                found = True
+                self.found = True
                 print(f"{player.full_name} - {player.team} {player.agent}")
-        if not found:
+        if not self.found:
             print("No hidden names found")
     
+    # progressBar credit: https://stackoverflow.com/users/2206251/
     @staticmethod
     def _progressBar(iterable, prefix = '', suffix = '', decimals = 1, length = 100, fill = '█', printEnd = "\r"):
         total = len(iterable)
@@ -30,5 +31,14 @@ class Game:
         # Print New Line on Complete
         print()
 
-    def find_streamers(self, players):
-        
+    def find_streamers(self, players, twitchReqDelay):
+        self.streamers = []
+        for player in self._progressBar(players, prefix='Progress:',suffix='Complete',length=len(players)):
+            if (player.is_live(twitchReqDelay)):
+                self.streamers.append(f"twitch.tv/{player.name}")
+            
+            if len(self.streamers) > 0:
+                for streamer in self.streamers:
+                    print(f"Live: {streamer}")
+            else:
+                print("No streamers found")
