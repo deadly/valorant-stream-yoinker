@@ -44,6 +44,7 @@ def progressBar(iterable, prefix = '', suffix = '', decimals = 1, length = 100, 
         printProgressBar(i + 1)
     # Print New Line on Complete
     print()
+    
 
 print("Waiting for a match to begin")
 while (running):
