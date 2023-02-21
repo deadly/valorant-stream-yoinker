@@ -1,6 +1,7 @@
 import json, time
 from valclient.client import Client
-from streamer import Player
+from player import Player
+from game import Game
 
 running = True
 seenMatches = []
@@ -27,27 +28,9 @@ else:
     client = Client(region=region)
     client.activate()
 
-# progressBar credit: https://stackoverflow.com/users/2206251/
-def progressBar(iterable, prefix = '', suffix = '', decimals = 1, length = 100, fill = '█', printEnd = "\r"):
-    total = len(iterable)
-    # Progress Bar Printing Function
-    def printProgressBar (iteration):
-        percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
-        filledLength = int(length * iteration // total)
-        bar = fill * filledLength + '-' * (length - filledLength)
-        print(f'\r{prefix} |{bar}| {percent}% {suffix}', end = printEnd)
-    # Initial Call
-    printProgressBar(0)
-    # Update Progress Bar
-    for i, item in enumerate(iterable):
-        yield item
-        printProgressBar(i + 1)
-    # Print New Line on Complete
-    print()
-    
-
 print("Waiting for a match to begin")
 while (running):
+    time.sleep(stateInterval)
     try:
         sessionState = client.fetch_presence(client.puuid)['sessionLoopState']
         matchID = client.coregame_fetch_player()['MatchID']
@@ -68,29 +51,15 @@ while (running):
                     team=player['TeamID']
                 ))
             
+            currentGame = Game(matchID, players)
+
             found = False
             print("\nFinding hidden names\n")
-            for player in players:
-                if (player.incognito):
-                    found = True
-                    print(f"{player.full_name} - {player.team} {player.agent}")
+            currentGame.find_hidden_names(players)
             
-            if not found:
-                print("No hidden names found")
-            
-            streamers = []
             print("\nFinding potential streamers\n")
-            for player in progressBar(players, prefix='Progress:',suffix='Complete',length=len(players)):
-                if (player.is_live(twitchReqDelay)):
-                    streamers.append(f"twitch.tv/{player.name}")
-            
-            if len(streamers) > 0:
-                for streamer in streamers:
-                    print(f"Live: {streamer}")
-            else:
-                print("No streamers found")
+            currentGame.find_streamers(players, twitchReqDelay)
 
     except Exception as e:
         if ("core" not in str(e)):
-            print(e)
-    time.sleep(stateInterval)
+            print("An error occurred:", e)
