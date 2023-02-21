@@ -1,5 +1,5 @@
 class Game:
-    def init(self, matchID, players):
+    def __init__(self, matchID, players):
         self.matchID = matchID
         self.players = players
     
