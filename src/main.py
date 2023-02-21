@@ -51,7 +51,7 @@ while (running):
                     team=player['TeamID']
                 ))
             
-            currentGame = Game(matchID, players)
+            currentGame = Game(matchID=matchID, players=players)
 
             found = False
             print("\nFinding hidden names\n")

@@ -37,8 +37,8 @@ class Game:
             if (player.is_live(twitchReqDelay)):
                 self.streamers.append(f"twitch.tv/{player.name}")
             
-            if len(self.streamers) > 0:
-                for streamer in self.streamers:
-                    print(f"Live: {streamer}")
-            else:
-                print("No streamers found")
+        if len(self.streamers) > 0:
+            for streamer in self.streamers:
+                print(f"Live: {streamer}")
+        else:
+            print("No streamers found")
