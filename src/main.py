@@ -37,7 +37,7 @@ while (running):
         matchID = client.coregame_fetch_player()['MatchID']
 
         if (sessionState == "INGAME" and matchID not in seenMatches):
-            print('-'*10)
+            print('-'*25)
             print("Match detected")
             seenMatches.append(matchID)
             matchInfo = client.coregame_fetch_match(matchID)

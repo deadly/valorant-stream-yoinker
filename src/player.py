@@ -42,6 +42,7 @@ class Player:
             return "Attacking"
     
     def set_name(self, puuid):
+        time.sleep(0.5)
         playerData = self.client.put(
             endpoint="/name-service/v2/players", 
             endpoint_type="pd", 
