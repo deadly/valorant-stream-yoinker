@@ -14,6 +14,7 @@ with open('settings.json', 'r') as f:
     region = data['region']
     stateInterval = data['stateInterval']
     twitchReqDelay = data['twitchReqDelay']
+    skipTeamPlayers = data['skipTeamPlayers']
 
 if (ranBefore == False):
     region = input("Enter your region: ").lower()
@@ -43,22 +44,31 @@ while (running):
             players = []
 
             for player in matchInfo['Players']:
-                players.append(Player(
-                    client=client,
-                    puuid=player['Subject'],
-                    agentID=player['CharacterID'],
-                    incognito=player['PlayerIdentity']['Incognito'],
-                    team=player['TeamID']
-                ))
+                if (client.puuid == player['Subject']):
+                    localPlayer = Player(
+                        client=client,
+                        puuid=player['Subject'],
+                        agentID=player['CharacterID'],
+                        incognito=player['PlayerIdentity']['Incognito'],
+                        team=player['TeamID']
+                    )
+                else:
+                    players.append(Player(
+                        client=client,
+                        puuid=player['Subject'],
+                        agentID=player['CharacterID'],
+                        incognito=player['PlayerIdentity']['Incognito'],
+                        team=player['TeamID']
+                    ))
             
-            currentGame = Game(matchID=matchID, players=players)
+            currentGame = Game(matchID=matchID, players=players, localPlayer=localPlayer)
 
             found = False
             print("\nFinding hidden names\n")
             currentGame.find_hidden_names(players)
             
             print("\nFinding potential streamers\n")
-            currentGame.find_streamers(players, twitchReqDelay)
+            currentGame.find_streamers(players, twitchReqDelay, skipTeamPlayers)
 
     except Exception as e:
         if ("core" not in str(e)):

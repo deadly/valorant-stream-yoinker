@@ -1,7 +1,9 @@
 class Game:
-    def __init__(self, matchID, players):
+    def __init__(self, matchID, players, localPlayer):
         self.matchID = matchID
         self.players = players
+        self.localPlayer = localPlayer
+        self.teamPlayers = self.find_team_players(self.localPlayer, self.players)
     
     def find_hidden_names(self, players):
         self.found = False
@@ -31,9 +33,12 @@ class Game:
         # Print New Line on Complete
         print()
 
-    def find_streamers(self, players, twitchReqDelay):
+    def find_streamers(self, players, twitchReqDelay, skipTeamPlayers):
         self.streamers = []
-        for player in self._progressBar(players, prefix='Progress:',suffix='Complete',length=len(players)):
+        for player in self._progressBar(players,prefix='Progress:',suffix='Complete',length=len(players)):
+            if (skipTeamPlayers and player in self.teamPlayers):
+                continue
+            
             if (player.is_live(twitchReqDelay)):
                 self.streamers.append(f"twitch.tv/{player.name}")
             
@@ -42,3 +47,12 @@ class Game:
                 print(f"Live: {streamer}")
         else:
             print("No streamers found")
+    
+    def find_team_players(self, localPlayer, players):
+        team_players = []
+        
+        for player in players:
+            if (player.team == localPlayer.team):
+                team_players.append(player)
+        
+        return team_players
