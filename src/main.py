@@ -63,7 +63,6 @@ while (running):
                     ))
             
             currentGame = Game(party=client.fetch_party(), matchID=matchID, players=players, localPlayer=localPlayer)
-            print(localPlayer.puuid)
             print("\nFinding hidden names\n")
             currentGame.find_hidden_names(players)
             
