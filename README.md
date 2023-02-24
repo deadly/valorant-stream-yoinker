@@ -11,7 +11,6 @@ settings.json:
 
     - stateInterval: int. change for faster or slower delays between gamestate loop (Slower = less CPU usage. Faster = more CPU usage)
 
-
     - twitchReqDelay: int. the delay for the request checking if a streamer is live. If you are getting ratelimited, make this slower. If you want faster loading times, make this faster.
     
     - skipTeamPlayers: boolean. decide whether or not you want to skip team members during the process of checking possible twitch names.
