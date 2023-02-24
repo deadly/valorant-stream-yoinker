@@ -5,7 +5,7 @@ Find the real username behind all hidden names by bypassing streamer mode, check
 https://discord.com/invite/faeM7p92pz
 
 # How to use
-**MAKE SURE VALORANT IS OPEN BEFORE RUNNING.** Wait for a game to start, and then names will start printing and being checked. Make sure to adjust your settings.json file to yuor preferences. You can open this file in any text editor (e.g Notepad).
+**MAKE SURE VALORANT IS OPEN BEFORE RUNNING.** Wait for a game to start, and then names will start printing and being checked. Make sure to adjust your settings.json file to your preferences. You can open this file in any text editor (e.g Notepad).
 
 settings.json:
 
