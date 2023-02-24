@@ -42,6 +42,7 @@ class Game:
                 continue
 
             if (skipPartyPlayers) and (player.puuid in self.partyPlayers):
+                print(f"skipped {player.name} becasue party")
                 continue
             
             if (player.is_live(twitchReqDelay)):
@@ -66,6 +67,6 @@ class Game:
         members = []
 
         for member in party['Members']:
-            members.append(member['Subject'])
+            members.append(member['Subject'].lower())
 
         return members

@@ -32,7 +32,7 @@ else:
 
 print("Waiting for a match to begin")
 while (running):
-    time.sleep(5)
+    time.sleep(30)
     try:
         sessionState = client.fetch_presence(client.puuid)['sessionLoopState']
         matchID = client.coregame_fetch_player()['MatchID']
@@ -48,7 +48,7 @@ while (running):
                 if (client.puuid == player['Subject']):
                     localPlayer = Player(
                         client=client,
-                        puuid=player['Subject'],
+                        puuid=player['Subject'].lower(),
                         agentID=player['CharacterID'].lower(),
                         incognito=player['PlayerIdentity']['Incognito'],
                         team=player['TeamID']
@@ -56,13 +56,14 @@ while (running):
                 else:
                     players.append(Player(
                         client=client,
-                        puuid=player['Subject'],
+                        puuid=player['Subject'].lower(),
                         agentID=player['CharacterID'].lower(),
                         incognito=player['PlayerIdentity']['Incognito'],
                         team=player['TeamID']
                     ))
             
             currentGame = Game(party=client.fetch_party(), matchID=matchID, players=players, localPlayer=localPlayer)
+            print(localPlayer.puuid)
             print("\nFinding hidden names\n")
             currentGame.find_hidden_names(players)
             
