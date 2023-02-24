@@ -42,6 +42,7 @@ class Player:
             return "Attacking"
     
     def set_name(self, puuid):
+        time.sleep(0.5)
         playerData = self.client.put(
             endpoint="/name-service/v2/players", 
             endpoint_type="pd", 
@@ -59,26 +60,19 @@ class Player:
     
     def find_possible_names(self):
         self.name_u = self.name.replace(' ', '_')
-        self.name_d = self.name.replace(' ', '-')
         self.name = self.name.replace(' ', '')
 
         return list(set([
             self.name,
-            self.name.replace(' ', ''),
+            self.name + self.tag,
             self.name_u,
-            self.name_d,
-            self.name.replace(' ', '-'),
-            self.name_d + self.tag,
             self.name_u + self.tag,
-            f"{self.name_d}_{self.tag}",
+            self.tag + self.name,
+            self.tag + self.name_u,
+            f"{self.name}_{self.tag}",
+            f"{self.tag}_{self.name}",
             f"{self.name_u}_{self.tag}",
-            f"{self.name_d}-{self.tag}",
-            f"{self.name_u}-{self.tag}",
-            f"{self.tag}{self.name}",
-            f"{self.tag}_{self.name_d}",
             f"{self.tag}_{self.name_u}",
-            f"{self.tag}-{self.name_d}",
-            f"{self.tag}-{self.name_u}"
         ]))
 
     def is_live(self, delay):
