@@ -70,5 +70,5 @@ while (running):
             currentGame.find_streamers(players, twitchReqDelay, skipTeamPlayers, skipPartyPlayers)
 
     except Exception as e:
-        if ("core" not in str(e)):
+        if ("core" not in str(e)) and ("NoneType" not in str(e)):
             print("An error occurred:", e)
