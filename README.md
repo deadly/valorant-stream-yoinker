@@ -15,7 +15,7 @@ settings.json:
     
     - skipTeamPlayers: boolean. decide whether or not you want to skip team members during the process of checking possible twitch names.
     
-    - skipPartyPlayers: boolean. decide whether or not you want to skip party members during the process of checking possible twitch names
+    - skipPartyPlayers: boolean. decide whether or not you want to skip party members during the process of checking possible twitch names.
 
 # Example
 <p align="center">
