@@ -15,6 +15,7 @@ with open('settings.json', 'r') as f:
     stateInterval = data['stateInterval']
     twitchReqDelay = data['twitchReqDelay']
     skipTeamPlayers = data['skipTeamPlayers']
+    skipPartyPlayers = data['skipPartyPlayers']
 
 if (ranBefore == False):
     region = input("Enter your region: ").lower()
@@ -31,13 +32,13 @@ else:
 
 print("Waiting for a match to begin")
 while (running):
-    time.sleep(stateInterval)
+    time.sleep(5)
     try:
         sessionState = client.fetch_presence(client.puuid)['sessionLoopState']
         matchID = client.coregame_fetch_player()['MatchID']
 
         if (sessionState == "INGAME" and matchID not in seenMatches):
-            print('-'*25)
+            print('-'*55)
             print("Match detected")
             seenMatches.append(matchID)
             matchInfo = client.coregame_fetch_match(matchID)
@@ -48,7 +49,7 @@ while (running):
                     localPlayer = Player(
                         client=client,
                         puuid=player['Subject'],
-                        agentID=player['CharacterID'],
+                        agentID=player['CharacterID'].lower(),
                         incognito=player['PlayerIdentity']['Incognito'],
                         team=player['TeamID']
                     )
@@ -56,19 +57,17 @@ while (running):
                     players.append(Player(
                         client=client,
                         puuid=player['Subject'],
-                        agentID=player['CharacterID'],
+                        agentID=player['CharacterID'].lower(),
                         incognito=player['PlayerIdentity']['Incognito'],
                         team=player['TeamID']
                     ))
             
-            currentGame = Game(matchID=matchID, players=players, localPlayer=localPlayer)
-
-            found = False
+            currentGame = Game(party=client.fetch_party(), matchID=matchID, players=players, localPlayer=localPlayer)
             print("\nFinding hidden names\n")
             currentGame.find_hidden_names(players)
             
             print("\nFinding potential streamers\n")
-            currentGame.find_streamers(players, twitchReqDelay, skipTeamPlayers)
+            currentGame.find_streamers(players, twitchReqDelay, skipTeamPlayers, skipPartyPlayers)
 
     except Exception as e:
         if ("core" not in str(e)):

@@ -1,7 +1,8 @@
 {
     "region": null, 
     "stateInterval": 30, 
-    "twitchReqDelay": 3, 
-    "ran": false,
-    "skipTeamPlayers": false
+    "twitchReqDelay": 3.5, 
+    "ran": false, 
+    "skipTeamPlayers": false,
+    "skipPartyPlayers": true
 }
