@@ -9,10 +9,14 @@ https://discord.com/invite/faeM7p92pz
 
 settings.json:
 
-    - stateInterval: change for faster or slower delays between gamestate loop (Slower = less CPU usage. Faster = more CPU usage)
+    - stateInterval: int. change for faster or slower delays between gamestate loop (Slower = less CPU usage. Faster = more CPU usage)
 
 
-    - twitchReqDelay: the delay for the request checking if a streamer is live. If you are getting ratelimited, make this slower. If you want faster loading times, make this faster.
+    - twitchReqDelay: int. the delay for the request checking if a streamer is live. If you are getting ratelimited, make this slower. If you want faster loading times, make this faster.
+    
+    - skipTeamPlayers: boolean. decide whether or not you want to skip team members during the process of checking possible twitch names.
+    
+    - skipPartyPlayers: boolean. decide whether or not you want to skip party members during the process of checking possible twitch names
 
 # Example
 <p align="center">
