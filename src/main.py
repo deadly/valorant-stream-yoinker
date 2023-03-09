@@ -25,7 +25,7 @@ if (ranBefore == False):
     with open('settings.json', 'w') as f:
             data['ran'] = True
             data['region'] = region
-            json.dump(data, f)
+            json.dump(data, f, indent=4)
 else:
     client = Client(region=region)
     client.activate()
