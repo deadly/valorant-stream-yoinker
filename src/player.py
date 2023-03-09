@@ -21,6 +21,7 @@ agentMap = {
     "707eab51-4836-f488-046a-cda6bf494859": "Viper",
     "dade69b4-4f5a-8528-247b-219e5a1facd6": "Fade",
     "95b78ed7-4637-86d9-7e41-71ba8c293152": "Harbor",
+    "e370fa57-4757-3604-3648-499e1f642d3f": "Gekko"
 }
 
 class Player:
@@ -42,7 +43,6 @@ class Player:
             return "Attacking"
     
     def set_name(self, puuid):
-        time.sleep(0.5)
         playerData = self.client.put(
             endpoint="/name-service/v2/players", 
             endpoint_type="pd", 
