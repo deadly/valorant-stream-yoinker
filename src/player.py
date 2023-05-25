@@ -1,4 +1,12 @@
-import requests, time
+import requests, time, random
+
+proxy_list = []
+x = requests.get('https://api.proxyscrape.com/v2/?request=displayproxies&protocol=socks4&timeout=5000&country=all&simplified=true', stream=True)
+for y in x.iter_lines():
+    if y: 
+        proxy_list.append({'http': f"socks4://{y.decode().strip()}"})
+        
+
 
 agentMap = {
     "add6443a-41bd-e414-f6ad-e58d267f4e95": "Jett",
@@ -78,7 +86,7 @@ class Player:
     def is_live(self, delay):
         for name in self.possibleNames:
             time.sleep(delay)
-            state = requests.get(f'https://twitch.tv/{name}').content.decode('utf-8')
+            state = requests.get(f'https://twitch.tv/{name}', proxies=random.choice(proxy_list)).content.decode('utf-8')
             if ('isLiveBroadcast' in state):
                 return name
         return False
