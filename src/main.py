@@ -37,7 +37,7 @@ while (running):
         sessionState = client.fetch_presence(client.puuid)['sessionLoopState']
         matchID = client.coregame_fetch_player()['MatchID']
 
-        if (sessionState == "INGAME" and matchID not in seenMatches):
+if (sessionState == "PREGAME" or "INGAME" and matchID not in seenMatches):
             print('-'*55)
             print("Match detected")
             seenMatches.append(matchID)
