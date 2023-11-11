@@ -30,7 +30,8 @@ agentMap = {
     "dade69b4-4f5a-8528-247b-219e5a1facd6": "Fade",
     "95b78ed7-4637-86d9-7e41-71ba8c293152": "Harbor",
     "e370fa57-4757-3604-3648-499e1f642d3f": "Gekko",
-    "cc8b64c8-4b25-4ff9-6e7f-37b4da43d235": "deadlock"
+    "cc8b64c8-4b25-4ff9-6e7f-37b4da43d235": "deadlock",
+    "0e38b510-41a8-5780-5e8f-568b2a4f2d6c": "iso"
 }
 
 class Player:
