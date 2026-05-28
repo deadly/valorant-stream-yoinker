@@ -1,35 +1,70 @@
-# Valorant Stream Yoinker
-Find the real username behind all hidden names by bypassing streamer mode, check all possible twitch names and print if a streamer is live
+# Valorant Stream Yoinker + Bomb Timer
 
-# Discord Support Server
-https://discord.com/invite/faeM7p92pz
+Fork of [deadly/valorant-stream-yoinker](https://github.com/deadly/valorant-stream-yoinker) combining **stream detection** and an **auto bomb timer overlay** in one app.
 
-# How to use
-**MAKE SURE VALORANT IS OPEN BEFORE RUNNING.** Wait for a game to start, and then names will start printing and being checked. Make sure to adjust your settings.json file to your preferences. You can open this file in any text editor (e.g Notepad).
+## Features
 
-settings.json:
+- **Stream Yoinker** — Reveals real usernames behind streamer mode, checks possible Twitch names, and notifies when a player is live.
+- **Bomb Timer** — Auto-detects spike plant on screen and shows a click-through 44s countdown overlay for timing practice.
 
-    - stateInterval: int. change for faster or slower delays between gamestate loop (Slower = less CPU usage. Faster = more CPU usage)
+## Requirements
 
-    - twitchReqDelay: int. the delay for the request checking if a streamer is live. If you are getting ratelimited, make this slower. If you want faster loading times, make this faster.
-    
-    - skipTeamPlayers: boolean. decide whether or not you want to skip team members during the process of checking possible twitch names.
-    
-    - skipPartyPlayers: boolean. decide whether or not you want to skip party members during the process of checking possible twitch names.
+- Windows
+- Python 3.10+
+- **Valorant must be running before you start the app**
 
-# Example
+## Install & run
+
+```bash
+pip install -r requirements.txt
+python src/main.py
+```
+
+On first launch, the app uses the region set in `src/main.py` (`DEFAULT_REGION`, default `eu`).
+
+## Configuration
+
+Settings are defined as constants at the top of `src/main.py`:
+
+| Constant | Description |
+|----------|-------------|
+| `DEFAULT_REGION` | Valorant region (`na`, `eu`, `latam`, `br`, `ap`, `kr`, `pbe`) |
+| `STATE_INTERVAL` | Delay between game-state checks (seconds). Higher = less CPU |
+| `TWITCH_REQ_DELAY` | Delay between Twitch live checks. Increase if rate-limited |
+| `SKIP_TEAM_PLAYERS` | Skip teammates when checking Twitch names |
+| `SKIP_PARTY_PLAYERS` | Skip party members when checking Twitch names |
+
+## Build executable
+
+```bash
+pip install pyinstaller
+pyinstaller valorant-stream-yoinker-bomb-timer.spec
+```
+
+Output: `dist/ValorantStreamYoinkerBombTimer.exe`
+
+## Example
+
 <p align="center">
-    <img src="https://raw.githubusercontent.com/deadly/valorant-stream-yoinker/main/example.png" alt="screenshot of VALORANT Stream Yoinker">
+    <img src="example.png" alt="Valorant Stream Yoinker screenshot">
 </p>
 
-# Regions
-The program will ask you for your region. The available regions are NA, EU, LATAM, BR, AP, KR, and PBE. Type the region that you play on. Here is a list of server locations and their respective region: https://support-valorant.riotgames.com/hc/en-us/articles/360055678634-Server-Select
+## Regions
 
-# Is This Bannable
-USE AT YOUR OWN RISK. With all programs like this, there is no guarantee that it's safe because using the VALORANT API in this manner is against Riot's Terms of Service. No suspensions have been reported so far from using this program. All things considered, I would use this only on an alt account if you don't want to risk the API abuse account suspension on your main, albeit unlikely.
+Available regions: `NA`, `EU`, `LATAM`, `BR`, `AP`, `KR`, `PBE`.  
+Server list: https://support-valorant.riotgames.com/hc/en-us/articles/360055678634-Server-Select
 
+## Is this bannable?
 
-# License
+**Use at your own risk.** Using the Valorant local API this way is against Riot's Terms of Service. No suspensions have been widely reported, but use on an alt if you want to minimize risk.
+
+## Credits
+
+- Original Stream Yoinker: [deadly/valorant-stream-yoinker](https://github.com/deadly/valorant-stream-yoinker)
+- This fork: [Sweizeur/valorant-stream-yoinker-bomb-timer](https://github.com/Sweizeur/valorant-stream-yoinker-bomb-timer)
+
+## License
+
 Copyright (c) 2023 deadly
 
 Permission to use, copy, modify, and/or distribute this software for any

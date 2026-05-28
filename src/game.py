@@ -1,3 +1,12 @@
+import webbrowser
+
+try:
+    from win10toast_click import ToastNotifier
+    _toaster = ToastNotifier()
+except ImportError:
+    _toaster = None
+
+
 class Game:
     def __init__(self, party, matchID, players, localPlayer):
         self.matchID = matchID
@@ -19,6 +28,10 @@ class Game:
     @staticmethod
     def _progressBar(iterable, prefix = '', suffix = '', decimals = 1, length = 100, fill = '█', printEnd = "\r"):
         total = len(iterable)
+        if total == 0:
+            # Rien à afficher, éviter une division par zéro
+            print(f'{prefix} |{"-" * length}| 0.0% {suffix}')
+            return
         # Progress Bar Printing Function
         def printProgressBar(iteration):
             percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
@@ -34,6 +47,25 @@ class Game:
         # Print New Line on Complete
         print()
 
+    @staticmethod
+    def _notify_streamer(player, url):
+        """Affiche une notification Windows pour un streamer trouvé, ouvre le lien au clic."""
+        if _toaster is None:
+            # Fallback si win10toast_click n'est pas installé
+            print(f"[NOTIF] {player.full_name} est en live: {url}")
+            return
+
+        def open_stream():
+            webbrowser.open(url)
+
+        _toaster.show_toast(
+            "Valorant Stream Yoinker + Bomb Timer",
+            f"{player.full_name} est en live sur Twitch",
+            duration=10,
+            threaded=True,
+            callback_on_click=open_stream,
+        )
+
     def find_streamers(self, players, twitchReqDelay, skipTeamPlayers, skipPartyPlayers):
         self.streamers = []
 
@@ -44,8 +76,11 @@ class Game:
             if (skipPartyPlayers) and (player.puuid in self.partyPlayers):
                 continue
             
-            if (player.is_live(twitchReqDelay)):
-                self.streamers.append(f"twitch.tv/{player.name}")
+            live_name = player.is_live(twitchReqDelay)
+            if live_name:
+                url = f"https://twitch.tv/{live_name}"
+                self.streamers.append(url)
+                self._notify_streamer(player, url)
             
         if len(self.streamers) > 0:
             for streamer in self.streamers:
@@ -64,8 +99,8 @@ class Game:
     
     def find_party_members(self, party):
         members = []
-
-        for member in party['Members']:
+        if party is None or not isinstance(party, dict):
+            return members
+        for member in party.get('Members') or []:
             members.append(member['Subject'].lower())
-
         return members
